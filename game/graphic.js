@@ -30,19 +30,33 @@ function init()
 
     light1 = new Light("sun", 0xffffff, "0,0,340");
     scene.add(light1);
+
+    enemy1 = new Enemy("enemy1", 0x000fff, new THREE.Vector2(100, 30), 0);
+    scene.add(enemy1.graphic);
+
 }
 
 function Ground(color, size_x, size_y, nb_tile)
 {
     colors = Array(0xff0000, 0x00ff00, 0x0000ff, 0x000000);
 
-    sizeOfTileX = size_x / nb_tile;
-    minX = -(size_x/2);
-    maxX = (size_x/2);
+    sizeOfTileX = size_x / nb_tile; // 60
+    minX = -(size_x/2); // -300
+    maxX = (size_x/2); // 300
     
-    sizeOfTileY = size_y / nb_tile;
-    minY = -(size_y/2);
-    maxY = (size_y/2);
+    sizeOfTileY = size_y / nb_tile; // 40
+    minY = -(size_y/2); // -200
+    maxY = (size_y/2); // 200
+
+    colorsBis = Array(0xff0000, 0x00ff00, 0x0000ff)
+    colorBis = colorsBis[Math.floor(Math.random()*colorsBis.length)];
+
+    tmpGround = new THREE.Mesh(
+            new THREE.PlaneGeometry(sizeOfTileX-10, sizeOfTileY-10),
+            new THREE.MeshLambertMaterial({color: colorBis, transparent: true, opacity: 0.6}));
+    tmpGround.position.x = 60;
+    tmpGround.position.y = 0;
+    scene.add(tmpGround);
 
     for (x = minX; x <= maxX; x = x+sizeOfTileX){
         for (y = minY; y <= maxY; y = y+sizeOfTileY){
@@ -52,8 +66,8 @@ function Ground(color, size_x, size_y, nb_tile)
             if (0x000000 != color)
             {
                 tmpGround = new THREE.Mesh(
-                new THREE.PlaneGeometry(sizeOfTileX-10, sizeOfTileY-10),
-                new THREE.MeshLambertMaterial({color: color, transparent: true, opacity: 0.6}));
+                    new THREE.PlaneGeometry(sizeOfTileX-10, sizeOfTileY-10),
+                    new THREE.MeshLambertMaterial({color: color, transparent: true, opacity: 0.6}));
                 tmpGround.position.x = x;
                 tmpGround.position.y = y;
                 scene.add(tmpGround);
@@ -66,7 +80,7 @@ function Ground(color, size_x, size_y, nb_tile)
 
 function Light(name, color, position)
 {
-    pointLight = new THREE.PointLight(color, 50, 350);
+    pointLight = new THREE.PointLight(color, 50, 3500);
 
     pointLight.position.x = position.split(',')[0];
     pointLight.position.y = position.split(',')[1];
