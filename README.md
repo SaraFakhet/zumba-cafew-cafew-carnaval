@@ -31,3 +31,6 @@ A video game with three.js
 - [ ] : As a player, I want to destroy ennemy when I shot them
 - [ ] : As a player, I want to decrease my life when I am touch by an ennemy
 - [ ] : As a player, I want to decrease my life when I fall 
+
+
+On dirait que je suis à 80% en lisant ce README, mais en réalité j'estime que je suis plutôt à 55%.
